@@ -17,16 +17,29 @@ struct ContentView: View {
             Text(String(bpm))
                 .font(.system(size: 68))
 
-            // "+"ボタン: タップするとBPMを1増やす
-            Button(action: {
-                    self.bpm += 1
-            }, label: {
-                Image(systemName: "plus.circle")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 60.0, height: 60.0)
-            })
-            .disabled(isPlaying)
+            HStack {
+                // "+"ボタン: タップするとBPMを1増やす
+                Button(action: {
+                        self.bpm -= 1
+                }, label: {
+                    Image(systemName: "minus.circle")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 60.0, height: 60.0)
+                })
+                .disabled(isPlaying)
+                
+                Button(action: {
+                        self.bpm += 1
+                }, label: {
+                    Image(systemName: "plus.circle")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 60.0, height: 60.0)
+                })
+                .disabled(isPlaying)
+            }
+            
 
             // 再生・停止ボタン
             if isPlaying == false {
