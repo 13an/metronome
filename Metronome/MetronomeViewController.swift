@@ -24,9 +24,9 @@ class MetronomeController {
     private var hapticPatternPlayer: CHHapticAdvancedPatternPlayer?
 
     // parameter of HapticEvent
-    private let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness, value: 0.4)
+    private let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness, value: 0.8)
     private let intensity = CHHapticEventParameter(parameterID: .hapticIntensity, value: 1.0)
-    private var hapticDuration: TimeInterval = TimeInterval(0.08)
+    private var hapticDuration: TimeInterval = TimeInterval(0.01)
 
     // parameter of AudioEvent
     private let audioVolume = CHHapticEventParameter(parameterID: .audioVolume, value: 1.0)
