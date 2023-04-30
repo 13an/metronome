@@ -14,10 +14,11 @@
 		3E2B872829FE5B83008FDD74 /* MetronomeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2B872729FE5B83008FDD74 /* MetronomeTests.swift */; };
 		3E2B873229FE5B83008FDD74 /* MetronomeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2B873129FE5B83008FDD74 /* MetronomeUITests.swift */; };
 		3E2B873429FE5B83008FDD74 /* MetronomeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2B873329FE5B83008FDD74 /* MetronomeUITestsLaunchTests.swift */; };
-		3E2B874129FE5BA7008FDD74 /* MetronomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2B874029FE5BA7008FDD74 /* MetronomeViewController.swift */; };
+		3E2B874129FE5BA7008FDD74 /* MetronomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2B874029FE5BA7008FDD74 /* MetronomeController.swift */; };
 		3E2B874329FE5C03008FDD74 /* metronome-sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3E2B874229FE5C03008FDD74 /* metronome-sound.mp3 */; };
-		3E2B874529FE9BEB008FDD74 /* LongPressableButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2B874429FE9BEB008FDD74 /* LongPressableButtonView.swift */; };
-		3E2B874729FE9F09008FDD74 /* Extention-LongPressableButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2B874629FE9F09008FDD74 /* Extention-LongPressableButtonView.swift */; };
+		3E2B874A29FEB5D4008FDD74 /* Metronome+HapticFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2B874929FEB5D4008FDD74 /* Metronome+HapticFeedback.swift */; };
+		3E2B874C29FEBDCB008FDD74 /* MetronomeView+BPMControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2B874B29FEBDCB008FDD74 /* MetronomeView+BPMControlView.swift */; };
+		3E2B874E29FEC527008FDD74 /* BPMControlView+HapticFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2B874D29FEC527008FDD74 /* BPMControlView+HapticFeedback.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,10 +49,11 @@
 		3E2B872D29FE5B83008FDD74 /* MetronomeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MetronomeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E2B873129FE5B83008FDD74 /* MetronomeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetronomeUITests.swift; sourceTree = "<group>"; };
 		3E2B873329FE5B83008FDD74 /* MetronomeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetronomeUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		3E2B874029FE5BA7008FDD74 /* MetronomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetronomeViewController.swift; sourceTree = "<group>"; };
+		3E2B874029FE5BA7008FDD74 /* MetronomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetronomeController.swift; sourceTree = "<group>"; };
 		3E2B874229FE5C03008FDD74 /* metronome-sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "metronome-sound.mp3"; sourceTree = "<group>"; };
-		3E2B874429FE9BEB008FDD74 /* LongPressableButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongPressableButtonView.swift; sourceTree = "<group>"; };
-		3E2B874629FE9F09008FDD74 /* Extention-LongPressableButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extention-LongPressableButtonView.swift"; sourceTree = "<group>"; };
+		3E2B874929FEB5D4008FDD74 /* Metronome+HapticFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Metronome+HapticFeedback.swift"; sourceTree = "<group>"; };
+		3E2B874B29FEBDCB008FDD74 /* MetronomeView+BPMControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MetronomeView+BPMControlView.swift"; sourceTree = "<group>"; };
+		3E2B874D29FEC527008FDD74 /* BPMControlView+HapticFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BPMControlView+HapticFeedback.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,13 +105,14 @@
 			isa = PBXGroup;
 			children = (
 				3E2B871629FE5B82008FDD74 /* MetronomeApp.swift */,
-				3E2B874029FE5BA7008FDD74 /* MetronomeViewController.swift */,
+				3E2B874029FE5BA7008FDD74 /* MetronomeController.swift */,
 				3E2B871829FE5B82008FDD74 /* MetronomeView.swift */,
-				3E2B874429FE9BEB008FDD74 /* LongPressableButtonView.swift */,
+				3E2B874B29FEBDCB008FDD74 /* MetronomeView+BPMControlView.swift */,
 				3E2B874229FE5C03008FDD74 /* metronome-sound.mp3 */,
 				3E2B871A29FE5B83008FDD74 /* Assets.xcassets */,
+				3E2B874D29FEC527008FDD74 /* BPMControlView+HapticFeedback.swift */,
+				3E2B874929FEB5D4008FDD74 /* Metronome+HapticFeedback.swift */,
 				3E2B871C29FE5B83008FDD74 /* Preview Content */,
-				3E2B874829FE9F23008FDD74 /* Extention */,
 			);
 			path = Metronome;
 			sourceTree = "<group>";
@@ -137,14 +140,6 @@
 				3E2B873329FE5B83008FDD74 /* MetronomeUITestsLaunchTests.swift */,
 			);
 			path = MetronomeUITests;
-			sourceTree = "<group>";
-		};
-		3E2B874829FE9F23008FDD74 /* Extention */ = {
-			isa = PBXGroup;
-			children = (
-				3E2B874629FE9F09008FDD74 /* Extention-LongPressableButtonView.swift */,
-			);
-			path = Extention;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -279,10 +274,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				3E2B871929FE5B82008FDD74 /* MetronomeView.swift in Sources */,
-				3E2B874529FE9BEB008FDD74 /* LongPressableButtonView.swift in Sources */,
-				3E2B874129FE5BA7008FDD74 /* MetronomeViewController.swift in Sources */,
-				3E2B874729FE9F09008FDD74 /* Extention-LongPressableButtonView.swift in Sources */,
+				3E2B874E29FEC527008FDD74 /* BPMControlView+HapticFeedback.swift in Sources */,
+				3E2B874A29FEB5D4008FDD74 /* Metronome+HapticFeedback.swift in Sources */,
+				3E2B874129FE5BA7008FDD74 /* MetronomeController.swift in Sources */,
 				3E2B871729FE5B82008FDD74 /* MetronomeApp.swift in Sources */,
+				3E2B874C29FEBDCB008FDD74 /* MetronomeView+BPMControlView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

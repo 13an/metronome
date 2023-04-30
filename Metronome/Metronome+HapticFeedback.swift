@@ -2,38 +2,38 @@ import Foundation
 import CoreHaptics
 import AVFoundation
 
-class MetronomeController {
+class MetronomeHapticFeedback {
     // parameter of metronome
     var bpm: Double = 120.0
-
+    
     // AudioSession
-    private var audioSession: AVAudioSession
+    var audioSession: AVAudioSession
 
     // parameters of audio data
-    private let audioResorceNames = "metronome-sound"
-    private var audioURL: URL?
-    private var audioResorceID: CHHapticAudioResourceID?
-
+    let audioResorceNames = "metronome-sound"
+    var audioURL: URL?
+    var audioResorceID: CHHapticAudioResourceID?
+    
     // HapticEngine
-    private var hapticEngine: CHHapticEngine!
-
+    var hapticEngine: CHHapticEngine!
+    
     // whether the device supports Core Haptics
-    private var supportsHaptics: Bool = false
-
+    var supportsHaptics: Bool = false
+    
     // HapticPatternPlayer
-    private var hapticPatternPlayer: CHHapticAdvancedPatternPlayer?
-
+    var hapticPatternPlayer: CHHapticAdvancedPatternPlayer?
+    
     // parameter of HapticEvent
-    private let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness, value: 0.8)
-    private let intensity = CHHapticEventParameter(parameterID: .hapticIntensity, value: 1.0)
-    private var hapticDuration: TimeInterval = TimeInterval(0.01)
-
+    let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness, value: 0.8)
+    let intensity = CHHapticEventParameter(parameterID: .hapticIntensity, value: 1.0)
+    var hapticDuration: TimeInterval = TimeInterval(0.01)
+    
     // parameter of AudioEvent
-    private let audioVolume = CHHapticEventParameter(parameterID: .audioVolume, value: 1.0)
-    private var audioDuration: TimeInterval {
+    let audioVolume = CHHapticEventParameter(parameterID: .audioVolume, value: 1.0)
+    var audioDuration: TimeInterval {
         TimeInterval(60.0 / bpm)
     }
-
+    
     init(){
         // AudioSession settings
         audioSession = AVAudioSession.sharedInstance()
@@ -59,7 +59,7 @@ class MetronomeController {
     }
 
     // create and start Engine
-    private func createAndStartHapticEngine() {
+    func createAndStartHapticEngine() {
         // check the device supports Core Haptics
         guard supportsHaptics else {
             print("This device does not support CoreHaptics")
@@ -81,41 +81,8 @@ class MetronomeController {
         }
     }
 
-    // play metronome
-    func play() {
-        // check the device supports Core Haptics
-        guard supportsHaptics else { return }
-
-        do {
-            // start HapticEngine
-            try hapticEngine.start()
-
-            // create HapticPattern
-            let pattern = try createPattern()   // defined this function below
-
-            // create Player
-            hapticPatternPlayer = try hapticEngine.makeAdvancedPlayer(with: pattern)
-            hapticPatternPlayer!.loopEnabled = true
-
-            // play metronome
-            try hapticPatternPlayer!.start(atTime: CHHapticTimeImmediate)
-
-        } catch let error {
-            print("Haptic Playback Error: \(error)")
-        }
-    }
-
-    // stop metronome
-    func stop(){
-        // check the device supports Core Haptics
-        guard supportsHaptics else { return }
-
-        // stop
-        hapticEngine.stop()
-    }
-
     // create HapticPattern
-    private func createPattern() throws -> CHHapticPattern {
+    func createPattern() throws -> CHHapticPattern {
         do {
             var eventList: [CHHapticEvent] = []
 
@@ -136,3 +103,4 @@ class MetronomeController {
         }
     }
 }
+
