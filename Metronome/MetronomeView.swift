@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct ContentView: View {
+struct MetronomeView: View {
     // UI表示に必要なパラメーター
     @State private var bpm: Int = 60
     @State private var isPlaying: Bool = false
@@ -25,9 +25,10 @@ struct ContentView: View {
                     Image(systemName: "minus.circle")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 60.0, height: 60.0)
+                        .frame(width: 48.0, height: 48.0)
                 })
                 .disabled(isPlaying)
+                .padding(.trailing, 24)
                 
                 Button(action: {
                         self.bpm += 1
@@ -35,7 +36,7 @@ struct ContentView: View {
                     Image(systemName: "plus.circle")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 60.0, height: 60.0)
+                        .frame(width: 48.0, height: 48.0)
                 })
                 .disabled(isPlaying)
             }
@@ -61,5 +62,11 @@ struct ContentView: View {
                 }
             }
         }
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        MetronomeView()
     }
 }
