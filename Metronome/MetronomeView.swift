@@ -1,24 +1,25 @@
 import SwiftUI
 
 struct MetronomeView: View {
-    // UI表示に必要なパラメーター
+    // parameters for displaying UI
     @State private var bpm: Int = 60
     @State private var isPlaying: Bool = false
 
-    // コントローラーのインスタンス
-    private var hapticController = MetronomeController()
+    // instances of ViewController
+    private var metronomeController = MetronomeController()
 
     var body: some View {
         VStack {
             Text("BPM")
                 .font(.system(size: 20))
 
-            // BPMを表示
+            // display BPM
             Text(String(bpm))
                 .font(.system(size: 68))
 
+            // bpm-controller
             HStack {
-                // "+"ボタン: タップするとBPMを1増やす
+                // slow-down-button
                 Button(action: {
                         self.bpm -= 1
                 }, label: {
@@ -30,6 +31,7 @@ struct MetronomeView: View {
                 .disabled(isPlaying)
                 .padding(.trailing, 24)
                 
+                // speed-up-button
                 Button(action: {
                         self.bpm += 1
                 }, label: {
@@ -42,11 +44,11 @@ struct MetronomeView: View {
             }
             
 
-            // 再生・停止ボタン
+            // play/stop button
             if isPlaying == false {
                 Button(action: {
-                    hapticController.bpm = Double(self.bpm)
-                    hapticController.play()
+                    metronomeController.bpm = Double(self.bpm)
+                    metronomeController.play()
                     isPlaying = true
                 }) {
                     Text("Start")
@@ -54,7 +56,7 @@ struct MetronomeView: View {
                 }
             } else {
                 Button(action: {
-                    hapticController.stop()
+                    metronomeController.stop()
                     isPlaying = false
                 }) {
                     Text("Stop")
