@@ -3,39 +3,39 @@ import CoreHaptics
 import AVFoundation
 
 class MetronomeController {
-    // メトロノームのパラメーター
+    // parameter of metronome
     var bpm: Double = 120.0
 
     // AudioSession
     private var audioSession: AVAudioSession
 
-    // 音声データに関わるパラメータ
+    // parameters of audio data
     private let audioResorceNames = "metronome-sound"
     private var audioURL: URL?
     private var audioResorceID: CHHapticAudioResourceID?
 
     // HapticEngine
-    private var engine: CHHapticEngine!
+    private var hapticEngine: CHHapticEngine!
 
-    // 端末がCore Hapticsに対応しているか
+    // whether the device supports Core Haptics
     private var supportsHaptics: Bool = false
 
     // HapticPatternPlayer
-    private var player: CHHapticAdvancedPatternPlayer?
+    private var hapticPatternPlayer: CHHapticAdvancedPatternPlayer?
 
-    // HapticEventのパラメーター
+    // parameter of HapticEvent
     private let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness, value: 0.4)
     private let intensity = CHHapticEventParameter(parameterID: .hapticIntensity, value: 1.0)
     private var hapticDuration: TimeInterval = TimeInterval(0.08)
 
-    // AudioEventのパラメーター
+    // parameter of AudioEvent
     private let audioVolume = CHHapticEventParameter(parameterID: .audioVolume, value: 1.0)
     private var audioDuration: TimeInterval {
         TimeInterval(60.0 / bpm)
     }
 
     init(){
-        // AudioSessionの設定
+        // AudioSession settings
         audioSession = AVAudioSession.sharedInstance()
         do {
             try audioSession.setCategory(.playback)
@@ -44,92 +44,92 @@ class MetronomeController {
             print("Failed to set and activate audio session category.")
         }
 
-        //　端末がCore Hapticsに対応しているかを調べる
+        //　check the device supports Core Haptics
         let hapticCapability = CHHapticEngine.capabilitiesForHardware()
         supportsHaptics = hapticCapability.supportsHaptics
 
-        // 外部音源の取り込み
+        // import audio data
         if let path = Bundle.main.path(forResource: audioResorceNames, ofType: "mp3") {
             audioURL = URL(fileURLWithPath: path)
         } else {
             print("Error: Failed to find audioURL")
         }
 
-        createAndStartHapticEngine()    //この関数は下で定義
+        createAndStartHapticEngine()    // define this function below
     }
 
-    // Engineの作成と開始
+    // create and start Engine
     private func createAndStartHapticEngine() {
-        // 端末の対応を確認
+        // check the device supports Core Haptics
         guard supportsHaptics else {
             print("This device does not support CoreHaptics")
             return
         }
 
-        // AudioSessionを渡してEngineを作成
+        // pass AudioSession and create HapticEngine
         do {
-            engine = try CHHapticEngine(audioSession: audioSession)
+            hapticEngine = try CHHapticEngine(audioSession: audioSession)
         } catch let error {
             fatalError("Engine Creation Error: \(error)")
         }
 
-        // Engineをスタート
+        // start HapticEngine
         do {
-            try engine.start()
+            try hapticEngine.start()
         } catch let error {
             print("Engin Start Error: \(error)")
         }
     }
 
-    // メトロノームを再生
+    // play metronome
     func play() {
-        // 端末の対応を確認
+        // check the device supports Core Haptics
         guard supportsHaptics else { return }
 
         do {
-            // Engineをスタート
-            try engine.start()
+            // start HapticEngine
+            try hapticEngine.start()
 
-            // HapticPatternを作成
-            let pattern = try createPattern()   //この関数は下で定義
+            // create HapticPattern
+            let pattern = try createPattern()   // defined this function below
 
-            // Playerを作成(Advacedの方を利用していることに注意)
-            player = try engine.makeAdvancedPlayer(with: pattern)
-            player!.loopEnabled = true
+            // create Player
+            hapticPatternPlayer = try hapticEngine.makeAdvancedPlayer(with: pattern)
+            hapticPatternPlayer!.loopEnabled = true
 
-            // 再生
-            try player!.start(atTime: CHHapticTimeImmediate)
+            // play metronome
+            try hapticPatternPlayer!.start(atTime: CHHapticTimeImmediate)
 
         } catch let error {
             print("Haptic Playback Error: \(error)")
         }
     }
 
-    // メトロノームを停止
+    // stop metronome
     func stop(){
-        // 端末の対応を確認
+        // check the device supports Core Haptics
         guard supportsHaptics else { return }
 
-        // 停止
-        engine.stop()
+        // stop
+        hapticEngine.stop()
     }
 
-    // HapticPatternの作成
+    // create HapticPattern
     private func createPattern() throws -> CHHapticPattern {
         do {
             var eventList: [CHHapticEvent] = []
 
-            // AudioResorceIDを取得
-            audioResorceID = try self.engine.registerAudioResource(audioURL!)
+            // get AudioResorceID
+            audioResorceID = try self.hapticEngine.registerAudioResource(audioURL!)
 
-            // eventListにHapticEventを加えていく
+            // add HapticEvent to eventList
             eventList.append(CHHapticEvent(audioResourceID: audioResorceID!, parameters: [audioVolume], relativeTime: 0, duration: self.audioDuration))
             eventList.append(CHHapticEvent(eventType: .hapticTransient, parameters: [sharpness, intensity], relativeTime: 0))
             eventList.append(CHHapticEvent(eventType: .hapticContinuous, parameters: [sharpness, intensity], relativeTime: 0, duration: self.hapticDuration))
 
-            // HapticPatternを生成し返す
-            let pattern = try CHHapticPattern(events: eventList, parameters: [])
-            return pattern
+            // create and return HapticPattern
+            let hapticPattern = try CHHapticPattern(events: eventList, parameters: [])
+            return hapticPattern
 
         } catch let error {
             throw error
